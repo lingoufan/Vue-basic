@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>qucikstart快速起步</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+        }
+
+        #app {
+            background-color: rgb(202, 141, 141);
+            box-sizing: border-box;
+            border: 50px solid blue;
+            padding: 10px;
+        }
+
+        #app1 {
+            width: 100%;
+            background-color: rgb(47, 194, 169);
+            height: 600px;
+            text-align: center;
+            position: absolute;
+            font-size: 24px;
+            /* padding: 10px; */
+            /* overflow: hidden ;   */
+            /* display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: stretch; */
+            /* height: 200px; */
+        }
+
+        /* #app1 p {
+            float: left;
+            background-color: rgb(189, 63, 189);
+            width: 200px;
+            height: 200px;
+            border: 10px solid #fff;
+            border: 20px solid #fff;
+            box-sizing: border-box;
+        } */
+
+        /* #app1 div {
+            width: 25%;
+        } */
+
+        /* #app1 div {
+            width: 30%;
+            height: 35%;
+            background-color: rgb(200, 223, 75);
+            flex: 0 0 20%;
+            margin: 10px;
+        } */
+
+        /* #one {
+            flex: 1 1  25%;
+            height: 150px;
+            background-color: rgb(91, 21, 94);
+            margin: 10px;
+        }
+
+        #two {
+            flex: 1 1  25%;
+            height: 50px;
+            background-color: rgb(200, 223, 75);
+            margin: 10px;
+        }
+
+        #three {
+            flex: 1 1  25%;
+            height: 100px;
+            background-color: rgb(190, 86, 54);
+            margin: 10px;
+        } */
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h2>{{message}}(直接使用插值表达式)</h2>
+        <h2 v-text="info"> (使用v-text指令来显示富文本)</h2>
+        <h2 v-html="info"></h2>
+        <h2>Vue.js很不错，尤其是{{Mustache}}插值表达式</h2>
+        <h2 V-pre>Vue.js很不错，尤其是{{Mustache}}插值表达式</h2>
+        <h2>{{firstName}} {{lastName}} (注意中间空格)</h2>
+        <h2>{{firstName + lastName}} (字符串拼接)</h2>
+        <h2>{{firstName.length}}个字符（获取firstName长度）</h2>
+        <h2>{{age *2}}（算数表达式）</h2>
+        <h2>{{age>40? '中年':'青年'}}（三目运算）</h2>
+        <h2>{{firstName.split('a').reverse().join(',')}} (使用js函数)</h2>
+        <h2>{{customMethod(firstName)}} (使用自定义函数)</h2>
+        <h2>{{date|dateFormat('')}}</h2>
+    </div>
+
+    <div id="app1">
+        <h2 v-show = "flag">
+            {{message}}
+        </h2>
+        <!-- <h2 v-if="!flag">
+            {{message}}
+        </h2> -->
+        <h2 v-if = "num >50">
+            大于50
+        </h2>
+        <h1 v-else-if ="num > 30">
+            大于30小于等于50
+        </h1>
+        <h1 v-else>
+            小于等于30
+        </h1>
+        <img v-bind:src="imgSrc" />
+        <!-- 简写为 -->
+        <!-- <img :src="imgSrc"/> -->
+        <input type="text" :placeholder="info">
+
+        <!-- <p></p>
+        <p></p>
+        <p></p> -->
+        <!-- <div id="one"></div>
+        <div id="two"></div>
+        <div id="three"></div> -->
+        <!-- <span>11111</span>
+        <span>22222</span>
+        <span>33333</span> -->
+    </div>
+    <!-- <script src="../js/vue.js"> -->
+    <!-- 从CDN引入vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        //全局过滤器
+        Vue.filter('dateFormat', function (input, pattern = '') {
+            let dt = new Date(input)
+            //年月日
+            let y = dt.getFullYear()
+            let m = (dt.getMonth() + 1).toString().padStart(2, '0')
+            let d = dt.getDate().toString().padStart(2, '0')
+            //时分秒
+            let hh = dt.getHours().toString().padStart(2, '0')
+            let mm = dt.getMinutes().toString().padStart(2, '0')
+            let ss = dt.getSeconds().toString().padStart(2, '0')
+            //拼接
+            if (pattern.toLocaleLowerCase() === 'yyyy-mm-dd') {
+                return `${y}-${m}-${d}`
+            } else {
+                return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
+            }
+
+        })
+
+        const app1 = new Vue({
+            el: '#app1',
+            data: {
+                message: 'LIN',
+                flag: true,
+                num: 50,
+                imgSrc:'https://img95.699pic.com/photo/50107/6159.jpg_wh300.jpg',
+                info: '请输入账号'
+            }
+        })
+
+
+        const app = new Vue({
+            el: '#app',
+            data: {
+                Mustache: 'Mustache',
+                message: 'Vue.js',
+                firstName: 'Java',
+                lastName: 'JavaScript',
+                age: 41,
+                info: '<a href="https://cn.vuejs.org/">Vue.js文档</a>',
+                date: new Date(),
+            },
+            methods: {
+                customMethod(str) {
+                    return str.split('a').reverse().join('#')
+                }
+            },
+            mounted() {
+                // this.timer = setInterval( function () {
+                this.timer = setInterval(() => {
+                    this.date = new Date()
+                }, 1000)
+            },
+            beforeDestory() {
+                if (this.timer) {
+                    clearInterval(this.timer)
+                }
+            },
+
+            filters: {
+                dateFormat: function (input, pattern = '') {
+                    let dt = new Date(input)
+                    //年月日
+                    let y = dt.getFullYear()
+                    let m = (dt.getMonth() + 1).toString().padStart(2, '0')
+                    let d = dt.getDate().toString().padStart(2, '0')
+                    //时分秒
+                    let hh = dt.getHours().toString().padStart(2, '0')
+                    let mm = dt.getMinutes().toString().padStart(2, '0')
+                    let ss = dt.getSeconds().toString().padStart(2, '0')
+                    //拼接
+                    if (pattern.toLocaleLowerCase() === 'yyyy-mm-dd') {
+                        return `${y}年${m}月${d}日`
+                    } else {
+                        return `${y}年${m}月${d}日  ${hh}:${mm}:${ss}`
+                    }
+                }
+            }
+
+        })
+
+
+    </script>
+</body>
+
+</html>
