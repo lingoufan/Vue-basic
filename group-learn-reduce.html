@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>reduce 归并</title>
+</head>
+<body>
+    <script>
+        var arr = [1,2,3,4,5];
+        var result1 = arr.reduce(function(total,cur,index,arr){  
+          console.log("total:"+total+",cur:"+cur+",index:"+index);
+            return total+cur;
+        });
+        console.log("结果："+result1);
+        // 输出
+        // total:1,cur:2,index:1
+        // total:3,cur:3,index:2
+        // total:6,cur:4,index:3
+        // total:10,cur:5,index:4
+        // 结果：15
+        var result2 = arr.reduce(function(total,cur,index,arr){  
+          console.log("total:"+total+",cur:"+cur+",index:"+index);
+            return total+cur;
+        },10);
+        console.log("结果："+result2);
+        // 输出
+        // total:10,cur:1,index:0
+        // total:11,cur:2,index:1
+        // total:13,cur:3,index:2
+        // total:16,cur:4,index:3
+        // total:20,cur:5,index:4
+        // 结果：25
+      </script>
+</body>
+</html>

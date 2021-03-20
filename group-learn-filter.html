@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        //是否存在某个值
+        var newarr = [
+            { num: 1, val: 'ceshi', flag: 'aa' },
+            { num: 2, val: 'ceshi2', flag: 'aa2' }
+        ]
+        console.log(newarr.filter(item => item.num === 2))
+        //过滤当前的
+        var newarr = [
+            { num: 1, val: 'ceshi', flag: 'aa' },
+            { num: 2, val: 'ceshi2', flag: 'aa2' }
+        ]
+        console.log(newarr.filter(item => item.num != 2))
+        //过滤掉不符合的数组
+        var arr = [20, 30, 50, 96, 50]
+        var newArr = arr.filter(item => item > 40)
+        console.log(newArr)
+
+        // var arr = [0, 1, 2, 3];
+        // var newArr = arr.filter(function (element, index, array) {
+        //     return element;
+        // })
+        // var newArr2 = arr.filter(function (element, index, array) {
+        //     return element >= 2;
+        // })
+        // console.log(newArr); // [1, 2, 3]
+        // console.log(newArr2); // [2, 3]
+
+    </script>
+</body>
+
+
+</html>

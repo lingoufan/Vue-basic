@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">点击</button>
+    <script>
+        let btn = document.getElementById('btn')
+        btn.onclick = function () {
+            console.log(this)
+        }
+        console.log(this === window)
+        console.log(this.document === document)
+
+        function test1() {
+            return this
+        }
+    
+        console.log(test1() === window)
+        //等于下面的代码
+        console.log(window.test1() === window)
+
+
+        //严格模式
+        function test2() {
+            'use strict'//使用严格模式
+            return this
+        }
+        console.log(test2() + '>>>>>>>>>>>')
+    
+        console.log(test2() == undefined)
+        console.log(window.test2() == window)
+    
+        console.log(test2() === undefined)
+        console.log(window.test2() === window)
+    </script>
+</body>
+</html>

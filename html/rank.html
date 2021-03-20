@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+    <title>排行榜</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="container">
+        <div class="row">
+          <div class="col s12 m3" v-for="(rank,index) in ranks" >
+            <div class="card blue-grey darken-1">
+              <div class="card-content white-text">
+                <span class="card-title">{{rank.title}}</span>
+                <p>
+                {{rank.author}}
+                </p>
+              </div>
+              <div class="card-action">
+                <a :href="rank.url">直播间地址</a>
+                <a href="#">This is a link</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+<!-- 
+        <div class="row">
+          <div class="col m3 cyan" v-for="(rank,index) in ranks" style="height: 200px; margin: 5px">
+            <div :key="index">
+              <h4>{{rank.title}}</h4>
+            </div>
+            <div class="divider"></div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      // 窗体加载就执行
+      window.onload = function () {
+        //定义json文件目录，本地或者服务器都可以，即下面的请求地址
+        let url = '../json/b-site.json'
+        //发起一个原生的ajax请求
+        let request = new XMLHttpRequest()
+        //打开一个get请求，尚未发送
+        request.open('get', url)
+        //发送请求（不带数据）
+        request.send(null)
+        //请求成功，执行回调函数
+        request.onload = function () {
+          //响应正确，处理数据
+          if (request.status == 200) {
+            let json = JSON.parse(request.responseText)
+            // console.log(json)
+
+            const app = new Vue({
+              el: '#app',
+              data: {
+                ranks: [],
+              },
+              methods: {},
+              created() {
+                this.ranks = json
+                console.log(this.ranks)
+              },
+            })
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

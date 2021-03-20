@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v-for列表渲染练习</title>
+    <style></style>
+  </head>
+  <body>
+    <div id="app" class="box">
+      <h1>v-for遍历数组</h1>
+      <h2>使用计算属性实时搜索</h2>
+      <input type="text" v-model="keywords1" />
+      <h3 v-if="filerPersons.length === 0">暂无结果</h3>
+      <template v-for="item in filerPersons">
+        <div>{{ item.name}} --- {{item.age}}</div>
+      </template>
+      <!-- 排序 -->
+      <button @click="setOrderType(0)">按年龄升序排序</button>
+      <button @click="setOrderType(1)">按年龄降序排序</button>
+      <hr />
+      <!-- 关键字输入 -->
+      <h2>使用自定义函数点击按钮搜索</h2>
+      <input type="text" v-model="keywords2" @focus="clear" />
+      <button @click="search">搜索</button>
+      <h3 v-if="res.length === 0">暂无结果</h3>
+      <template v-for="item in res">
+        <div>{{ item.name}} --- {{item.age}}</div>
+      </template>
+      <!-- 排序 -->
+      <button>按年龄升序排序</button>
+      <button>按年龄降序排序</button>
+      <hr />
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: '#app',
+        data: {
+          keywords1: '',
+          keywords2: '',
+          persons: [
+            { name: 'ab', age: 18 },
+            { name: 'bb', age: 19 },
+            { name: 'cd', age: 20 },
+            { name: 'cbb', age: 21 },
+          ],
+          res: [],
+          student: {
+            name: 'tom',
+            age: 20,
+            gender: 'male',
+          },
+          orderType: 0,
+        },
+        computed: {
+          filerPersons() {
+            // const { keywords, person } = this
+            let resultPersons
+            // 按关键字搜索
+            resultPersons = this.persons.filter((item) => item.name.indexOf(this.keywords1) != -1)
+            // console.log(JSON.stringify(resultPersons))
+
+            console.log(this.orderType)
+            // 按年龄升序排序
+            if (this.orderType === 0) {
+              resultPersons.sort(function (p1, p2) {
+                return p1.age - p2.age
+              })
+            }
+            // 按年龄降序排序
+            if (this.orderType === 1) {
+              // resultPersons.sort(function (p1, p2) {
+              //   return p2.age - p1.age
+              // })
+
+              resultPersons.sort((p1, p2) => p2.age - p1.age)
+            }
+            return resultPersons
+          },
+        },
+        created() {
+          this.res = this.persons
+        },
+        methods: {
+          // 设置orderType的值
+          setOrderType(val) {
+            this.orderType = val
+            console.log(this.orderType)
+          },
+          search() {
+            console.log(this.keywords2)
+            if (this.keywords2.length == 0) {
+              this.res = this.persons
+              return
+            }
+            this.res = this.persons.filter((item) => item.name.indexOf(this.keywords2) != -1)
+            console.log(JSON.stringify(this.res))
+          },
+          clear() {
+            this.keywords2 = ''
+            this.res = this.persons
+          },
+        },
+      })
+    </script>
+  </body>
+</html>

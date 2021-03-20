@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>测试1</button>
+    <button>ceshi</button>
+    <button>1111</button>
+
+    <script>
+        var btns = document.getElementById('button')
+        // for ( var index = 0; index < btns.length;index++) {
+        //     btns[index].onclick = function (){
+        //         console.log('点击了第'+ index +"个按钮")
+        //     }
+        // }
+
+        //闭包解决
+        // for (var index = 0; index < btns.length; index++) {
+        //     ;(function (index) {
+        //         btns[index].onclick = function () {
+        //             console.log('点击了第' + index + "个按钮")
+        //         }
+        //     })(index)
+        // }
+
+        //es6的let
+        for (let index = 0; index < btns.length; index++) {
+            btns[index].onclick = function () {
+                console.log('点击了第' + index + "个按钮")
+            }
+        }
+    </script>
+</body>
+</html>

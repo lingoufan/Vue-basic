@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>背景切换</title>
+    <style>
+        .p-box {
+         
+        }
+        p {
+            width: 400px;
+            height: 150px;
+            line-height: 150px;
+            text-align: center;
+            font-size: 1.5em; 
+            border: 2px solid red;
+        }
+        .frame {
+            height: 70px;
+            width: 200px;
+            /* margin: 100px auto 0 auto; */
+            background-color: #fff;
+            border-radius: 40px;
+            border: 5px solid blue;
+        }
+
+        .frame .ball {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            background-color: aqua;
+            border-radius: 50%;
+        }
+
+        .moving {
+            transform: translateX(130px);
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <div id="app" class="box">
+
+        <div class="frame">
+            <div class="ball" :class="className" @click="move"></div>
+        </div>
+        <div class="p-box">
+            <p :style="{ 'background-color':background }"></p>
+        </div>
+    </div>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                className: '',
+                background: '#fff'
+            },
+            methods: {
+                move() {
+                    if (this.className === '') {
+                        this.className = 'moving'
+                        this.background = '#000'
+                    } else {
+                        this.className = ''
+                        this.background = '#FFF'
+                    }
+
+
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>

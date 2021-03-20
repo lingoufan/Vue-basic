@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            color: black;
+        }
+
+        .btn {
+            width: 100px;
+            height: 50px;
+            font-size: 1.5em;
+
+        }
+
+        p {
+            width: 400px;
+            height: 150px;
+            line-height: 150px;
+            /* background-color: #fff;
+            color: #000; */
+
+            text-align: center;
+            font-size: 1.5em;
+        }
+
+        .class1 {
+            color: #000;
+        }
+
+        .class2 {
+            background-color: #fff;
+        }
+
+        .class3 {
+            color: #fff;
+        }
+
+        .class4 {
+            background-color: #000;
+        }
+    </style>
+</head>
+
+<body :class="qwe">
+    <div id="app" class="box">
+        <p :style="{color: color, 'background-color':background }">字体</p>
+
+        <button class="btn" @click="p($event)">变化1</button>
+        <button class="btn" @click="change2">变化2</button>
+        <button class="btn" @click="change">变化</button>
+
+        <!-- <p   :class="['classArr']">字体</p>
+        <button class="btn" @click ="change">变化</button> -->
+    </div>
+   
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                color: "#000",
+                background: '#fff',
+            },
+            methods: {
+                p( ev){
+                    console.log(ev)
+                },
+                // change() {
+                //     // this.classArr.push('class3') 
+                //     // this.classArr.push('class4') 
+                //     this.classArr = ['class1','class2']
+                // }
+                change1() {
+                    this.color = "#FFF"
+                    this.background = '#000'
+                },
+                change2() {
+                    this.color = '#000'
+                    this.background = "#FFF"
+                },
+                change() {
+                    if(this.color === "#FFF"&& this.background === "#000") {
+                        this.color = "#000"
+                        this.background ="#FFF"
+                    }else {
+                        this.color = "#FFF"
+                        this.background ="#000"
+                    }
+                }
+            }
+        },
+        )
+
+
+    </script>
+</body>
+
+</html>
